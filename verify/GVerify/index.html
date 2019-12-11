@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<title>图形验证码</title>
+        <style>
+            .container{
+                min-width: 400px;
+                text-align: center;
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+            .code_input {
+                height: 38px;
+                line-height: 1.3;
+                border: 1px solid #e6e6e6;
+                background-color: #fff;
+                border-radius: 2px;
+                display: inline-block;
+                width: 180px;
+                padding-left: 10px;
+                box-sizing: border-box;
+            }
+            .v_container{
+                width: 120px;
+                height: 38px;
+                display: inline-block;
+                vertical-align: bottom;
+                margin: 0 4px;
+            }
+            .submit{
+                display: inline-block;
+                height: 38px;
+                line-height: 38px;
+                padding: 0 18px;
+                color: #fff;
+                text-align: center;
+                font-size: 14px;
+                border-radius: 2px;
+                cursor: pointer;
+                background-color: #1E9FFF;
+            }
+        </style>
+	</head>
+
+	<body>
+		<div class="container">
+            验证码：<input type="text" class="code_input">
+            <div id="v_container" class="v_container"></div>
+            <div class="submit">提交</div>
+		</div>
+		<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+		<script src="./static/GVerify.js"></script>
+		<script>
+            var verifyCode = new GVerify({ //默认options参数值
+            id: "v_container", //容器Id
+            type: "blend" //图形验证码默认类型blend:数字字母混合类型、number:纯数字、letter:纯字母
+        });
+            $('.submit').click(function(){
+                var res = verifyCode.validate($('.code_input').val());
+                if (!res) {
+                    alert("图形验证码错误！");
+                    $('.code_input').val('')
+                }else{
+                    alert("图形验证码成功！");
+                }
+            })
+            
+		</script>
+	</body>
+
+</html>
